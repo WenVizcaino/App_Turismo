@@ -2,9 +2,11 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controlador.Conexion;
 
@@ -24,6 +26,7 @@ public class Paquetes {
 	public int id_agencia = 0;
 	public int idpromotores = 0;
 	public int precio = 0;
+	Conexion conector = new Conexion();
 
 	public int getCodigo() {
 		return codigo;
@@ -140,7 +143,6 @@ public class Paquetes {
 	public void create( String iddestion, String idorigen, String fechaventa, String horaventa, String horasalida, String fechaejecucion,
 			String observacion, String idmedios, String idtipotransporte, String idclientes, String id_agencia, String idpromotores, String precio) {
 
-		Conexion conector = new Conexion();
 
 		Connection dbConnection = null;
 		PreparedStatement pst = null;
@@ -174,4 +176,68 @@ public class Paquetes {
 		}
 
 	}
+
+	public void delete(int codigo) {
+		Connection bdConnection = null;
+		   PreparedStatement pst = null;
+		   String script = "DELETE FROM tblpaquetes WHERE codigo = ?";
+
+		try {
+			bdConnection = conector.conectarBD();
+			pst = bdConnection.prepareStatement(script);
+
+			pst.setInt(1, codigo);
+
+			int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + codigo + "?");
+
+			if (resp == JOptionPane.OK_OPTION) {
+				pst.executeUpdate();
+				JOptionPane.showConfirmDialog(null, "Registro No. " + codigo + " Eliminado");
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+		}
+
+	public void readOne(int codigo, JTextField iddestion, JTextField idorigen, JTextField fechaventa,
+			JTextField horaventa, JTextField horasalida, JTextField fechaejecucion,
+			JTextField observacion, JTextField idmedios, JTextField idtipotransporte,
+			JTextField idpromotores, JTextField precio, JTextField idclientes) {
+
+		Connection bdConnection = null;
+		PreparedStatement pst = null;
+		String script = "SELECT * FROM tblpaquetes WHERE codigo = ?";
+
+		try {
+			bdConnection = conector.conectarBD();
+			pst = bdConnection.prepareStatement(script);
+
+			pst.setInt(1, codigo);
+
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				iddestion.setText(rs.getString(2));
+				idorigen.setText(rs.getString(3));
+				fechaventa.setText(rs.getString(4));
+				horaventa.setText(rs.getString(5));
+				horasalida.setText(rs.getString(6));
+				fechaejecucion.setText(rs.getString(7));
+				observacion.setText(rs.getString(8));
+				idmedios.setText(rs.getString(9));
+				idtipotransporte.setText(rs.getString(10));
+				idpromotores.setText(rs.getString(11));
+				precio.setText(rs.getString(12));
+				idclientes.setText(rs.getString(13));
+			
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}		
+	}			
+	
 }

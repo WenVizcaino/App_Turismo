@@ -10,7 +10,7 @@ public class Conexion {
 	public Connection conectarBD() {
 		Connection connection = null;
 		try {
-//String de conexion 
+//Reaizar la coneccion, String de conexion 
 		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bd_turismo","root","2556229");
 		System.out.println("Connected whith the database successfully");
 		} catch (SQLException e) {

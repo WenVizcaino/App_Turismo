@@ -15,6 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class FrmTiposMedios extends JFrame {
 
@@ -23,7 +25,8 @@ public class FrmTiposMedios extends JFrame {
 	private JTextField txtNombre;
 	private JTextField txtObservacion;
 	private JTextField txtidmedios;
-
+	private JTextField textidtiposmedios;
+	TiposMedios cr = new TiposMedios();
 	/**
 	 * Launch the application.
 	 */
@@ -53,33 +56,34 @@ public class FrmTiposMedios extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(123, 81, 46, 14);
+		lblNombre.setBounds(49, 81, 46, 14);
 		contentPane.add(lblNombre);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(226, 78, 86, 20);
+		txtNombre.setBounds(123, 78, 86, 20);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		JLabel lblObservacion = new JLabel("Observacion");
-		lblObservacion.setBounds(123, 129, 75, 14);
+		lblObservacion.setBounds(49, 117, 75, 14);
 		contentPane.add(lblObservacion);
 		
 		txtObservacion = new JTextField();
-		txtObservacion.setBounds(226, 126, 86, 20);
+		txtObservacion.setBounds(123, 109, 86, 20);
 		contentPane.add(txtObservacion);
 		txtObservacion.setColumns(10);
 		
 		JLabel lblGestionMedios = new JLabel("Gestion de tipo de medios");
-		lblGestionMedios.setBounds(154, 11, 141, 14);
+		lblGestionMedios.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblGestionMedios.setBounds(140, 26, 158, 14);
 		contentPane.add(lblGestionMedios);
 		
 		JLabel lblidmedios = new JLabel("Id Medios");
-		lblidmedios.setBounds(141, 170, 46, 14);
+		lblidmedios.setBounds(49, 152, 46, 14);
 		contentPane.add(lblidmedios);
 		
 		txtidmedios = new JTextField();
-		txtidmedios.setBounds(226, 167, 86, 20);
+		txtidmedios.setBounds(123, 149, 86, 20);
 		contentPane.add(txtidmedios);
 		txtidmedios.setColumns(10);
 		
@@ -87,11 +91,44 @@ public class FrmTiposMedios extends JFrame {
 		btnguardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TiposMedios cr = new TiposMedios();
+			
 				cr.create(txtNombre.getText(),txtObservacion.getText(),txtidmedios.getText());
 			}
 		});
-		btnguardar.setBounds(195, 213, 89, 23);
+		btnguardar.setBounds(77, 196, 89, 23);
 		contentPane.add(btnguardar);
+		
+		JLabel lblidtiposmedios = new JLabel("Id Tipos Medios");
+		lblidtiposmedios.setBounds(286, 81, 46, 14);
+		contentPane.add(lblidtiposmedios);
+		
+		textidtiposmedios = new JTextField();
+		textidtiposmedios.setBounds(264, 106, 86, 20);
+		contentPane.add(textidtiposmedios);
+		textidtiposmedios.setColumns(10);
+		
+		JButton btndelete = new JButton("");
+		btndelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.delete(Integer.parseInt(textidtiposmedios.getText()));
+
+			}
+		});
+		btndelete.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\2931168_bin_delete_remove_trash_garbage_icon (1).png"));
+		btndelete.setBounds(321, 137, 46, 63);
+		contentPane.add(btndelete);
+		
+		JButton btnconsult = new JButton("");
+		btnconsult.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.readOne(Integer.parseInt(textidtiposmedios.getText()),txtNombre,txtObservacion,txtidmedios);
+			
+			}
+		});
+		btnconsult.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161346_search_magnifying_glass_zoom_tools_icon.png"));
+		btnconsult.setBounds(242, 137, 53, 51);
+		contentPane.add(btnconsult);
 	}
 }

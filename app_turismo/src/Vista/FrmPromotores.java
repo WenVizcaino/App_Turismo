@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class FrmPromotores extends JFrame {
 
@@ -28,6 +29,8 @@ public class FrmPromotores extends JFrame {
 	private JTextField textcorreocorporativo;
 	private JTextField textfechanacimiento;
 	private JTextField texttelefono;
+	private JTextField textidpromotores;
+	Promotores cr = new Promotores ();
 
 	/**
 	 * Launch the application.
@@ -50,7 +53,7 @@ public class FrmPromotores extends JFrame {
 	 */
 	public FrmPromotores() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 585);
+		setBounds(100, 100, 557, 585);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -142,12 +145,48 @@ public class FrmPromotores extends JFrame {
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Promotores cr = new Promotores ();
 				cr.create(texttipoidentificacion.getText(),textnumerodocumento.getText(),textnombre.getText(),textapellido.getText(),textdireción.getText(),textcorreopersonal.getText(),textcorreocorporativo.getText(),textfechanacimiento.getText(),texttelefono.getText());
 			}
 		});
-		btnGuardar.setBounds(118, 474, 89, 23);
+		btnGuardar.setBounds(320, 278, 89, 23);
 		contentPane.add(btnGuardar);
-	}
+		
+		JLabel lblidpromotores = new JLabel("Id Promotores");
+		lblidpromotores.setBounds(398, 85, 79, 14);
+		contentPane.add(lblidpromotores);
+		
+		textidpromotores = new JTextField();
+		textidpromotores.setBounds(398, 108, 86, 20);
+		contentPane.add(textidpromotores);
+		textidpromotores.setColumns(10);
+		
+		JButton btndelete = new JButton("");
+		btndelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.delete(Integer.parseInt(textidpromotores.getText()));
 
+			}
+		});
+		btndelete.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\2931168_bin_delete_remove_trash_garbage_icon (1).png"));
+		btndelete.setBounds(438, 130, 46, 57);
+		contentPane.add(btndelete);
+		
+		JButton btnconsult = new JButton("");
+		btnconsult.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.readOne(Integer.parseInt(textidpromotores.getText()),texttipoidentificacion,textnumerodocumento,textnombre,textapellido,textdireción,textcorreopersonal,textcorreocorporativo,textfechanacimiento,texttelefono);
+
+			}
+	
+		});
+		btnconsult.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161346_search_magnifying_glass_zoom_tools_icon.png"));
+		btnconsult.setBounds(370, 140, 58, 48);
+		contentPane.add(btnconsult);
+		
+		JLabel lblNewLabel = new JLabel("GESTION PROMOTORES");
+		lblNewLabel.setBounds(177, 29, 142, 14);
+		contentPane.add(lblNewLabel);
+	}
 }

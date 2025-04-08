@@ -2,9 +2,11 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controlador.Conexion;
 
@@ -13,6 +15,8 @@ public class TipoTransporte {
 	public int idtipotransporte =0;
 	public String nombre ="";
 	public String observacion ="";
+	Conexion conector = new Conexion();
+
 	public int getIdtipotransporte() {
 		return idtipotransporte;
 	}
@@ -33,7 +37,6 @@ public class TipoTransporte {
 	}
 	
 	public void create(String nombre, String observacion) {
-		Conexion conector = new Conexion();
 				
 				Connection dbConnection = null;
 				PreparedStatement pst = null;
@@ -56,6 +59,60 @@ public class TipoTransporte {
 			System.out.println(e.getMessage());
 		}		
 	}
-}
+	public void delete(int idtipotransporte) {
+		Connection bdConnection = null;
+		   PreparedStatement pst = null;
+		   String script = "DELETE FROM tbltipotransporte WHERE idtipotransporte = ?";
+
+		try {
+			bdConnection = conector.conectarBD();
+			pst = bdConnection.prepareStatement(script);
+
+			pst.setInt(1, idtipotransporte);
+
+			int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + idtipotransporte + "?");
+
+			if (resp == JOptionPane.OK_OPTION) {
+				pst.executeUpdate();
+				JOptionPane.showConfirmDialog(null, "Registro No. " + idtipotransporte + " Eliminado");
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}		
+	}
+	public void readOne(int idtipotransporte, JTextField nombre, JTextField Observacion) {
+		
+		
+		Connection bdConnection = null;
+		PreparedStatement pst = null;
+		String script = "SELECT * FROM tbltipotransporte WHERE idtipotransporte = ?";
+
+		try {
+			bdConnection = conector.conectarBD();
+			pst = bdConnection.prepareStatement(script);
+
+			pst.setInt(1, idtipotransporte);
+
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				nombre.setText(rs.getString(2));
+				Observacion.setText(rs.getString(3));
+			
+				
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}		
+	}
+	}
+	
+	
+	
+
 
 

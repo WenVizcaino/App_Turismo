@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class FrmOperador extends JFrame {
 
@@ -28,6 +29,13 @@ public class FrmOperador extends JFrame {
 	private JTextField textelefono;
 	private JLabel lblidtransporte;
 	private JTextField textid_transporte;
+	private JLabel lblidoperador;
+	private JTextField textidoperador;
+	private JButton btndelete;
+	Operador cr = new Operador();
+	private JButton btnconsultar;
+	private JLabel lblNewLabel;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -58,65 +66,65 @@ public class FrmOperador extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblTipoIdentificacion = new JLabel("Tipo Identificacion");
-		lblTipoIdentificacion.setBounds(67, 37, 46, 14);
+		lblTipoIdentificacion.setBounds(67, 105, 46, 14);
 		contentPane.add(lblTipoIdentificacion);
 		
 		texttipoidentificacion = new JTextField();
-		texttipoidentificacion.setBounds(163, 34, 86, 20);
+		texttipoidentificacion.setBounds(140, 102, 86, 20);
 		contentPane.add(texttipoidentificacion);
 		texttipoidentificacion.setColumns(10);
 		
 		JLabel lblNumeroDocumento = new JLabel("Numero Documento");
-		lblNumeroDocumento.setBounds(67, 75, 46, 14);
+		lblNumeroDocumento.setBounds(67, 150, 46, 14);
 		contentPane.add(lblNumeroDocumento);
 		
 		textnumerodocumento = new JTextField();
-		textnumerodocumento.setBounds(163, 72, 86, 20);
+		textnumerodocumento.setBounds(140, 147, 86, 20);
 		contentPane.add(textnumerodocumento);
 		textnumerodocumento.setColumns(10);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(67, 118, 46, 14);
+		lblNombre.setBounds(67, 192, 46, 14);
 		contentPane.add(lblNombre);
 		
 		textnombre = new JTextField();
-		textnombre.setBounds(163, 115, 86, 20);
+		textnombre.setBounds(140, 189, 86, 20);
 		contentPane.add(textnombre);
 		textnombre.setColumns(10);
 		
 		JLabel lblApellido = new JLabel("Apellido");
-		lblApellido.setBounds(67, 154, 46, 14);
+		lblApellido.setBounds(67, 227, 46, 14);
 		contentPane.add(lblApellido);
 		
 		textapellido = new JTextField();
-		textapellido.setBounds(163, 146, 86, 20);
+		textapellido.setBounds(140, 224, 86, 20);
 		contentPane.add(textapellido);
 		textapellido.setColumns(10);
 		
 		JLabel lblDireccion = new JLabel("Direccion");
-		lblDireccion.setBounds(67, 192, 46, 14);
+		lblDireccion.setBounds(67, 269, 46, 14);
 		contentPane.add(lblDireccion);
 		
 		textdireción = new JTextField();
-		textdireción.setBounds(163, 189, 86, 20);
+		textdireción.setBounds(140, 266, 86, 20);
 		contentPane.add(textdireción);
 		textdireción.setColumns(10);
 		
 		JLabel lblCorreoElectronico = new JLabel("Correo Electronico");
-		lblCorreoElectronico.setBounds(67, 223, 46, 14);
+		lblCorreoElectronico.setBounds(67, 302, 46, 14);
 		contentPane.add(lblCorreoElectronico);
 		
 		textcorreoelectronico = new JTextField();
-		textcorreoelectronico.setBounds(163, 220, 86, 20);
+		textcorreoelectronico.setBounds(140, 299, 86, 20);
 		contentPane.add(textcorreoelectronico);
 		textcorreoelectronico.setColumns(10);
 		
 		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setBounds(67, 260, 46, 14);
+		lblTelefono.setBounds(67, 333, 46, 14);
 		contentPane.add(lblTelefono);
 		
 		textelefono = new JTextField();
-		textelefono.setBounds(163, 257, 86, 20);
+		textelefono.setBounds(140, 330, 86, 20);
 		contentPane.add(textelefono);
 		textelefono.setColumns(10);
 		
@@ -124,22 +132,70 @@ public class FrmOperador extends JFrame {
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Operador cr = new Operador();
 				cr.create(texttipoidentificacion.getText(),textnumerodocumento.getText(),textnombre.getText(),textapellido.getText(),textdireción.getText(),textcorreoelectronico.getText(),textelefono.getText(),textid_transporte.getText());
 		
 			}
 		});
-		btnGuardar.setBounds(108, 365, 89, 23);
+		btnGuardar.setBounds(107, 398, 89, 23);
 		contentPane.add(btnGuardar);
 		
 		lblidtransporte = new JLabel("ID transporte");
-		lblidtransporte.setBounds(67, 304, 46, 14);
+		lblidtransporte.setBounds(67, 373, 46, 14);
 		contentPane.add(lblidtransporte);
 		
 		textid_transporte = new JTextField();
-		textid_transporte.setBounds(163, 301, 86, 20);
+		textid_transporte.setBounds(140, 367, 86, 20);
 		contentPane.add(textid_transporte);
 		textid_transporte.setColumns(10);
+		
+		lblidoperador = new JLabel("Id Operador");
+		lblidoperador.setBounds(306, 183, 46, 14);
+		contentPane.add(lblidoperador);
+		
+		textidoperador = new JTextField();
+		textidoperador.setBounds(291, 208, 86, 20);
+		contentPane.add(textidoperador);
+		textidoperador.setColumns(10);
+		
+		btndelete = new JButton("");
+		btndelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.delete(Integer.parseInt(textidoperador.getText()));
+
+			}
+		});
+		btndelete.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\2931168_bin_delete_remove_trash_garbage_icon (1).png"));
+		btndelete.setBounds(354, 302, 56, 57);
+		contentPane.add(btndelete);
+		
+		btnconsultar = new JButton("");
+		btnconsultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.readOne(Integer.parseInt(textidoperador.getText()),texttipoidentificacion,textnumerodocumento,textnombre,textapellido,textdireción,textcorreoelectronico,textelefono,textid_transporte);
+
+			}
+		});
+		btnconsultar.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161346_search_magnifying_glass_zoom_tools_icon.png"));
+		btnconsultar.setBounds(344, 239, 66, 47);
+		contentPane.add(btnconsultar);
+		
+		lblNewLabel = new JLabel("GESTION DE OPERADOR");
+		lblNewLabel.setBounds(154, 29, 133, 14);
+		contentPane.add(lblNewLabel);
+		
+		btnNewButton = new JButton("");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.Update(Integer.parseInt(textidoperador.getText()), texttipoidentificacion.getText(), textnumerodocumento.getText(), textnombre.getText(), textapellido.getText(), textdireción.getText(), textcorreoelectronico.getText(),textelefono.getText(),textid_transporte.getText());
+				
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161342_refresh_reload_restart_user_multimedia_icon.png"));
+		btnNewButton.setBounds(344, 364, 66, 57);
+		contentPane.add(btnNewButton);
 	}
 
 }

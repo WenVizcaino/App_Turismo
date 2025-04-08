@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class FrmTransporte extends JFrame {
 
@@ -26,6 +27,8 @@ public class FrmTransporte extends JFrame {
 	private JTextField textnombre;
 	private JTextField textobservacion;
 	private JTextField textidtipotransporte;
+	private JTextField textid_transporte;
+	Transporte cr = new Transporte ();
 
 	/**
 	 * Launch the application.
@@ -56,56 +59,56 @@ public class FrmTransporte extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblPuestos = new JLabel("Puestos");
-		lblPuestos.setBounds(77, 39, 46, 14);
+		lblPuestos.setBounds(41, 96, 46, 14);
 		contentPane.add(lblPuestos);
 		
 		JLabel lblModelo = new JLabel("Modelo");
-		lblModelo.setBounds(77, 82, 46, 14);
+		lblModelo.setBounds(41, 127, 46, 14);
 		contentPane.add(lblModelo);
 		
 		textpuestos = new JTextField();
-		textpuestos.setBounds(151, 36, 86, 20);
+		textpuestos.setBounds(151, 93, 86, 20);
 		contentPane.add(textpuestos);
 		textpuestos.setColumns(10);
 		
 		textmodelo = new JTextField();
-		textmodelo.setBounds(151, 79, 86, 20);
+		textmodelo.setBounds(151, 124, 86, 20);
 		contentPane.add(textmodelo);
 		textmodelo.setColumns(10);
 		
 		JLabel lblNumeromotor = new JLabel("Numero de Motor");
-		lblNumeromotor.setBounds(77, 123, 46, 14);
+		lblNumeromotor.setBounds(41, 158, 100, 14);
 		contentPane.add(lblNumeromotor);
 		
 		textnumeromotor = new JTextField();
-		textnumeromotor.setBounds(151, 120, 86, 20);
+		textnumeromotor.setBounds(151, 155, 86, 20);
 		contentPane.add(textnumeromotor);
 		textnumeromotor.setColumns(10);
 		
 		JLabel lblPlacavehiculo = new JLabel("Placa vehiculo");
-		lblPlacavehiculo.setBounds(77, 168, 46, 14);
+		lblPlacavehiculo.setBounds(41, 186, 82, 17);
 		contentPane.add(lblPlacavehiculo);
 		
 		textplacavehiculo = new JTextField();
-		textplacavehiculo.setBounds(151, 165, 86, 20);
+		textplacavehiculo.setBounds(151, 186, 86, 20);
 		contentPane.add(textplacavehiculo);
 		textplacavehiculo.setColumns(10);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(77, 212, 46, 14);
+		lblNombre.setBounds(41, 220, 46, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel lblObservacion = new JLabel("Observacion");
-		lblObservacion.setBounds(77, 252, 46, 14);
+		lblObservacion.setBounds(41, 251, 82, 14);
 		contentPane.add(lblObservacion);
 		
 		textnombre = new JTextField();
-		textnombre.setBounds(151, 209, 86, 20);
+		textnombre.setBounds(151, 217, 86, 20);
 		contentPane.add(textnombre);
 		textnombre.setColumns(10);
 		
 		textobservacion = new JTextField();
-		textobservacion.setBounds(151, 249, 86, 20);
+		textobservacion.setBounds(151, 248, 86, 20);
 		contentPane.add(textobservacion);
 		textobservacion.setColumns(10);
 		
@@ -113,22 +116,61 @@ public class FrmTransporte extends JFrame {
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Transporte cr = new Transporte ();
 				cr.create(textpuestos.getText(),textmodelo.getText(),textnumeromotor.getText(),textplacavehiculo.getText(),textnombre.getText(),textobservacion.getText(), textidtipotransporte.getText());
 				
 				
 			}
 		});
-		btnGuardar.setBounds(299, 119, 89, 23);
+		btnGuardar.setBounds(100, 310, 89, 23);
 		contentPane.add(btnGuardar);
 		
 		JLabel lblidtipotransporte = new JLabel("ID Tipo Transporte");
-		lblidtipotransporte.setBounds(77, 302, 46, 14);
+		lblidtipotransporte.setBounds(41, 285, 89, 14);
 		contentPane.add(lblidtipotransporte);
 		
 		textidtipotransporte = new JTextField();
-		textidtipotransporte.setBounds(151, 299, 86, 20);
+		textidtipotransporte.setBounds(151, 279, 86, 20);
 		contentPane.add(textidtipotransporte);
 		textidtipotransporte.setColumns(10);
+		
+		JLabel lblid_transporte = new JLabel("Id Transporte");
+		lblid_transporte.setBounds(321, 82, 46, 14);
+		contentPane.add(lblid_transporte);
+		
+		textid_transporte = new JTextField();
+		textid_transporte.setBounds(300, 104, 86, 20);
+		contentPane.add(textid_transporte);
+		textid_transporte.setColumns(10);
+		
+		JButton btndelete = new JButton("");
+		btndelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.delete(Integer.parseInt(textid_transporte.getText()));
+
+			}
+		});
+		btndelete.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\2931168_bin_delete_remove_trash_garbage_icon (1).png"));
+		btndelete.setBounds(355, 127, 54, 59);
+		contentPane.add(btndelete);
+		
+		JButton btnconsult = new JButton("");
+		btnconsult.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.readOne(Integer.parseInt(textid_transporte.getText()),textpuestos,textmodelo,textnumeromotor,textplacavehiculo,textnombre,textobservacion,textidtipotransporte);
+					
+				
+				
+				
+			}
+		});
+		btnconsult.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161346_search_magnifying_glass_zoom_tools_icon.png"));
+		btnconsult.setBounds(283, 127, 64, 59);
+		contentPane.add(btnconsult);
+		
+		JLabel lblNewLabel = new JLabel("GESTION DE TRANSPORTE");
+		lblNewLabel.setBounds(151, 31, 145, 14);
+		contentPane.add(lblNewLabel);
 	}
 }

@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class FrmClientes extends JFrame {
 
@@ -31,6 +33,9 @@ public class FrmClientes extends JFrame {
 	private JTextField textestadocivil;
 	private JTextField texttelefono;
 	private JTextField textdireción;
+	private JTextField textidclientes;
+	Clientes cr = new Clientes();
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -127,12 +132,12 @@ public class FrmClientes extends JFrame {
 		btnguardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			Clientes cr = new Clientes();
+			
 			cr.create(texttipodocumento.getText(),textnumerodocumento.getText(),textnombre.getText(),textapellido.getText(),texteps.getText(),textalergias.getText(),textfechanacimiento.getText(),textcorreoelectronico.getText(),textestadocivil.getText(),texttelefono.getText(),textdireción.getText());
 	
 			}
 		});
-		btnguardar.setBounds(324, 193, 89, 23);
+		btnguardar.setBounds(302, 292, 89, 23);
 		contentPane.add(btnguardar);
 		
 		JLabel lblCorreoElectronico = new JLabel("Correo ");
@@ -170,5 +175,54 @@ public class FrmClientes extends JFrame {
 		textdireción.setBounds(155, 406, 86, 20);
 		contentPane.add(textdireción);
 		textdireción.setColumns(10);
+		
+		JLabel lblidclientes = new JLabel("ID Clientes");
+		lblidclientes.setBounds(324, 73, 67, 14);
+		contentPane.add(lblidclientes);
+		
+		textidclientes = new JTextField();
+		textidclientes.setBounds(390, 70, 86, 20);
+		contentPane.add(textidclientes);
+		textidclientes.setColumns(10);
+		
+		JButton btndelete = new JButton("");
+		btndelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.delete(Integer.parseInt(textidclientes.getText()));
+				
+			}
+		});
+		btndelete.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\2931168_bin_delete_remove_trash_garbage_icon (1).png"));
+		btndelete.setBounds(452, 163, 55, 57);
+		contentPane.add(btndelete);
+		
+		JButton btnconsultar = new JButton("");
+		btnconsultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.readOne(Integer.parseInt(textidclientes.getText()),texttipodocumento,textnumerodocumento,textnombre,textapellido,texteps,textalergias,textfechanacimiento,textcorreoelectronico,textestadocivil,texttelefono,textdireción);
+
+			}
+		});
+		btnconsultar.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161346_search_magnifying_glass_zoom_tools_icon.png"));
+		btnconsultar.setBounds(452, 104, 55, 48);
+		contentPane.add(btnconsultar);
+		
+		lblNewLabel_1 = new JLabel("GESTION CLIENTES");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_1.setBounds(216, 35, 115, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		JButton btnUpdate = new JButton("");
+		btnUpdate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			cr.Update(Integer.parseInt(textidclientes.getText()), texttipodocumento.getText(),textnumerodocumento.getText(),textnombre.getText(),textapellido.getText(), texteps.getText(), textalergias.getText(), textfechanacimiento.getText(), textcorreoelectronico.getText(), textestadocivil.getText(), texttelefono.getText(),textdireción.getText());
+			}
+		});
+		btnUpdate.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161342_refresh_reload_restart_user_multimedia_icon.png"));
+		btnUpdate.setBounds(440, 235, 67, 54);
+		contentPane.add(btnUpdate);
 	}
 }

@@ -2,9 +2,11 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controlador.Conexion;
 
@@ -13,6 +15,8 @@ public class TiposMedios {
 	public String nombre;
 	public String Observacion;
 	public int idmedios;
+	Conexion conector = new Conexion();
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -32,7 +36,6 @@ public class TiposMedios {
 		this.idmedios = idmedios;
 	}
 	public void create(String nombre, String Observacion, String idmedios) {
-		Conexion conector = new Conexion();
 				
 				Connection dbConnection = null;
 				PreparedStatement pst = null;
@@ -57,5 +60,62 @@ public class TiposMedios {
 			System.out.println(e.getLocalizedMessage());
 		}		
 	}
+	public void delete(int idtiposmedios) {
+		Connection bdConnection = null;
+		   PreparedStatement pst = null;
+		   String script = "DELETE FROM tbltiposmedios WHERE idtiposmedios = ?";
+
+		try {
+			bdConnection = conector.conectarBD();
+			pst = bdConnection.prepareStatement(script);
+
+			pst.setInt(1, idtiposmedios);
+
+			int resp = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro No. " + idtiposmedios + "?");
+
+			if (resp == JOptionPane.OK_OPTION) {
+				pst.executeUpdate();
+				JOptionPane.showConfirmDialog(null, "Registro No. " + idtiposmedios + " Eliminado");
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+		}
+	public void readOne(int idtiposmedios, JTextField Nombre, JTextField Observacion, JTextField idmedios) {
+		
+		
+		Connection bdConnection = null;
+		PreparedStatement pst = null;
+		String script = "SELECT * FROM tbltiposmedios WHERE idtiposmedios = ?";
+
+		try {
+			bdConnection = conector.conectarBD();
+			pst = bdConnection.prepareStatement(script);
+
+			pst.setInt(1, idtiposmedios);
+
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				Nombre.setText(rs.getString(2));
+				Observacion.setText(rs.getString(3));
+				idmedios.setText(rs.getString(4));
 	
-}
+				
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}		
+	}
+	
+	}			
+	
+
+	
+		
+	
+	

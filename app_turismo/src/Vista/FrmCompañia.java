@@ -6,12 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Model.Agencia;
 import Model.Compañia;
 
 import javax.swing.JLabel;
-import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -23,7 +23,9 @@ public class FrmCompañia extends JFrame {
 	private JTextField textdireccion;
 	private JTextField texttelefono;
 	private JTextField textcorreo;
-	private JTextField textfechaCreacion;
+	private JTextField textfechacreacion;
+	private JTextField textid_compañia;
+	Compañia cr = new Compañia();
 	private JTextField textweb;
 
 	/**
@@ -47,82 +49,128 @@ public class FrmCompañia extends JFrame {
 	 */
 	public FrmCompañia() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 469);
+		setBounds(100, 100, 450, 388);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRazonSocial = new JLabel("Razon Social");
-		lblRazonSocial.setBounds(111, 68, 46, 14);
-		contentPane.add(lblRazonSocial);
+		JLabel lblrazonsocial = new JLabel("Razon Social");
+		lblrazonsocial.setBounds(27, 61, 46, 14);
+		contentPane.add(lblrazonsocial);
+		
+		JLabel lbldireccion = new JLabel("Direccion");
+		lbldireccion.setBounds(27, 86, 46, 14);
+		contentPane.add(lbldireccion);
+		
+		JLabel lblcorreo = new JLabel("Correo");
+		lblcorreo.setBounds(27, 135, 46, 14);
+		contentPane.add(lblcorreo);
+		
+		JLabel lblweb = new JLabel("Web");
+		lblweb.setBounds(27, 185, 46, 14);
+		contentPane.add(lblweb);
+		
+		JLabel lblfechacreacion = new JLabel("Fecha Creacion");
+		lblfechacreacion.setBounds(27, 160, 46, 14);
+		contentPane.add(lblfechacreacion);
+		
+		JLabel lbltelefono = new JLabel("Telefono");
+		lbltelefono.setBounds(27, 111, 46, 14);
+		contentPane.add(lbltelefono);
 		
 		textrazonsocial = new JTextField();
-		textrazonsocial.setBounds(196, 65, 86, 20);
+		textrazonsocial.setBounds(83, 58, 86, 20);
 		contentPane.add(textrazonsocial);
 		textrazonsocial.setColumns(10);
 		
-		JLabel lblDireccion = new JLabel("Direccion");
-		lblDireccion.setBounds(111, 99, 46, 14);
-		contentPane.add(lblDireccion);
-		
 		textdireccion = new JTextField();
-		textdireccion.setBounds(196, 96, 86, 20);
+		textdireccion.setBounds(83, 83, 86, 20);
 		contentPane.add(textdireccion);
 		textdireccion.setColumns(10);
 		
-		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setBounds(111, 146, 46, 14);
-		contentPane.add(lblTelefono);
-		
 		texttelefono = new JTextField();
-		texttelefono.setBounds(196, 143, 86, 20);
+		texttelefono.setBounds(83, 108, 86, 20);
 		contentPane.add(texttelefono);
 		texttelefono.setColumns(10);
 		
-		JLabel lblCorreo = new JLabel("Correo");
-		lblCorreo.setBounds(111, 194, 46, 14);
-		contentPane.add(lblCorreo);
-		
 		textcorreo = new JTextField();
-		textcorreo.setBounds(196, 191, 86, 20);
+		textcorreo.setBounds(83, 132, 86, 20);
 		contentPane.add(textcorreo);
 		textcorreo.setColumns(10);
 		
-		JLabel lblFechaCreacion = new JLabel("Fecha Creacion");
-		lblFechaCreacion.setBounds(111, 243, 46, 14);
-		contentPane.add(lblFechaCreacion);
+		textfechacreacion = new JTextField();
+		textfechacreacion.setBounds(83, 157, 86, 20);
+		contentPane.add(textfechacreacion);
+		textfechacreacion.setColumns(10);
 		
-		textfechaCreacion = new JTextField();
-		textfechaCreacion.setBounds(196, 240, 86, 20);
-		contentPane.add(textfechaCreacion);
-		textfechaCreacion.setColumns(10);
+		JButton btnguardar = new JButton("GUARDAR");
+		btnguardar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.create(textrazonsocial.getText(),textdireccion.getText(),texttelefono.getText(),textcorreo.getText(),textfechacreacion.getText(),textweb.getText());
+
+			}
+		});
+		btnguardar.setBounds(112, 213, 89, 23);
+		contentPane.add(btnguardar);
 		
-		JLabel lblWeb = new JLabel("Web");
-		lblWeb.setBounds(111, 284, 46, 14);
-		contentPane.add(lblWeb);
+		JLabel lblid_compañia = new JLabel("Id Compañia");
+		lblid_compañia.setBounds(260, 61, 86, 14);
+		contentPane.add(lblid_compañia);
+		
+		textid_compañia = new JTextField();
+		textid_compañia.setBounds(260, 83, 86, 20);
+		contentPane.add(textid_compañia);
+		textid_compañia.setColumns(10);
+		
+		JButton btndelete = new JButton("");
+		btndelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.delete(Integer.parseInt(textid_compañia.getText()));
+
+			}
+		});
+		btndelete.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\2931168_bin_delete_remove_trash_garbage_icon (1).png"));
+		btndelete.setBounds(348, 161, 56, 57);
+		contentPane.add(btndelete);
 		
 		textweb = new JTextField();
-		textweb.setBounds(196, 284, 86, 20);
+		textweb.setBounds(83, 182, 86, 20);
 		contentPane.add(textweb);
 		textweb.setColumns(10);
 		
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.addMouseListener(new MouseAdapter() {
+		JButton btnconsultar = new JButton("");
+		btnconsultar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Compañia cr = new Compañia();
-				cr.create(textrazonsocial.getText(),textdireccion.getText(),texttelefono.getText(),textcorreo.getText(),textfechaCreacion.getText(),textweb.getText());
+				cr.readOne(Integer.parseInt(textid_compañia.getText()),textrazonsocial,textdireccion,texttelefono,textcorreo,textfechacreacion,textweb);
+
+			}
+		});
+		btnconsultar.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161346_search_magnifying_glass_zoom_tools_icon.png"));
+		btnconsultar.setBounds(348, 111, 56, 49);
+		contentPane.add(btnconsultar);
+		
+		JLabel lblNewLabel = new JLabel("GESTION COMPAÑIA");
+		lblNewLabel.setBounds(167, 27, 102, 20);
+		contentPane.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.Update(Integer.parseInt(textid_compañia.getText()), textrazonsocial.getText(),textdireccion.getText(),texttelefono.getText(),textcorreo.getText(),textfechacreacion.getText(),textweb.getText());
+				
+				
+				
 				
 			}
 		});
-		btnGuardar.setBounds(155, 346, 89, 23);
-		contentPane.add(btnGuardar);
-		
-		JLabel lblCompañia = new JLabel("Compañia");
-		lblCompañia.setBounds(155, 23, 66, 14);
-		contentPane.add(lblCompañia);
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161342_refresh_reload_restart_user_multimedia_icon.png"));
+		btnNewButton.setBounds(348, 226, 56, 60);
+		contentPane.add(btnNewButton);
 	}
-
 }
