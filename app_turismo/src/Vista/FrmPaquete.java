@@ -216,7 +216,7 @@ public class FrmPaquete extends JFrame {
 		btnconsultar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				cr.readOne(Integer.parseInt(textcodigo.getText()),textiddestion,textidorigen,textfechaventa,texthoraventa,texthorasalida,textfechaejecucion,textobservacion,textidmedios,textidtipotransporte,textidpromotores,textprecio,textidclientes);
+				cr.readOne(Integer.parseInt(textcodigo.getText()),textiddestion,textidorigen,textfechaventa,texthoraventa,texthorasalida,textfechaejecucion,textobservacion,textidmedios,textidtipotransporte,textidpromotores,textprecio,textidclientes,textid_agencia);
 
 			}
 		});
@@ -227,6 +227,18 @@ public class FrmPaquete extends JFrame {
 		JLabel lblNewLabel = new JLabel("GESTION DE PAQUETES");
 		lblNewLabel.setBounds(252, 55, 128, 14);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnUpdate = new JButton("");
+		btnUpdate.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161342_refresh_reload_restart_user_multimedia_icon.png"));
+		btnUpdate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			cr.Update(Integer.parseInt(textcodigo.getText()),textiddestion.getText(), textidorigen.getText(), textfechaventa.getText(), texthoraventa.getText(), texthorasalida.getText(), textfechaejecucion.getText(), textobservacion.getText(), textidmedios.getText(), textidtipotransporte.getText(),textidpromotores.getText(), textprecio.getText(), textidclientes.getText(),textid_agencia.getText());
+			}
+			
+		});
+		btnUpdate.setBounds(383, 450, 58, 57);
+		contentPane.add(btnUpdate);
 	}
 
 }

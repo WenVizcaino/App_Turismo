@@ -112,10 +112,44 @@ public class TiposMedios {
 		}		
 	}
 	
-	}			
+				
 	
 
+//metodo que recibe y no retorna
+
+    public void Update(int idtiposmedios, String Nombre, String Observacion, int idmedios) {
+
+	Connection dbConnection = null;
+	PreparedStatement pst = null;
 	
+	String script = "UPDATE tbltiposmedios SET nombre = ?, Observacion = ?,idmedios=? WHERE idtiposmedios = ? " ;
+		
+	try { 
+	
+	dbConnection = conector.conectarBD();
+	pst = dbConnection.prepareStatement(script);
+	
+	pst.setString(1,Nombre);
+	pst.setString(2,Observacion);
+	pst.setInt(3,idmedios);
+	pst.setInt(4,idtiposmedios);
+
+	int respuesta = JOptionPane.showConfirmDialog(null, "Desea actualizar el reistro No. " + idtiposmedios + "?");
+	
+	if (respuesta == JOptionPane.YES_OPTION) {
+		pst.execute();
+		JOptionPane.showConfirmDialog(null, "Registro No." + idtiposmedios +"Actualizado");
+	}
+}
+  catch (Exception e) {
+	System.out.println(e.getMessage());
+
+}
+	
+}
+	
+}
+
 		
 	
 	

@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import Controlador.Conexion;
 
 public class Agencia {
-
+//atributos
 	public int id_agencia;
 	public String nombre;
 	public int dirección;
@@ -20,8 +20,12 @@ public class Agencia {
 	public String wed;
 	public int idcompañia;
 
+	
+	//llamando clasesz coneccion
 	Conexion conector = new Conexion();
 
+	
+	//contructores
 	public int getIdagencia() {
 
 		return id_agencia;
@@ -78,26 +82,30 @@ public class Agencia {
 	public void setIdcompañia(int idcompañia) {
 		this.idcompañia = idcompañia;
 	}
+	
+	//metodo que recibe y no retorna, se llama create
 
-	public void create(String Nombre, String direccion, String correo, String tel, String web, String idcompania) {
+
+	public void create(String Nombre, String direccion, String correo, String tel, String web, String tblcompañia_id_compañia) {
 
 		Connection dbConnection = null;
-		PreparedStatement pst = null;
+		PreparedStatement pst = null; //prepara la transaccion
 
-		String script = "INSERT INTO tblagencia (nombre, dirección, correoelectronico, telefono, web, id_compañia) values (?,?,?,?,?,?)";
+		String script = "INSERT INTO tblagencia (nombre, dirección, correoelectronico, telefono, web, tblcompañia_id_compañia) values (?,?,?,?,?,?)";
 
 		try {
-			System.out.println(idcompania);
-			dbConnection = conector.conectarBD(); 
+			dbConnection = conector.conectarBD(); // abre la conecccion
 			pst = dbConnection.prepareStatement(script); //buffer, Almacenamiento temporal
 
+			
+			//parametrizar los campos
 			pst.setString(1, Nombre);
 			pst.setString(2, direccion);
 			pst.setString(3, correo);
 			pst.setString(4, tel);
 			pst.setString(5, web);
-			pst.setString(6, idcompania);
-
+			pst.setString(6, tblcompañia_id_compañia);
+             // ejecuta la transaccion
 			pst.executeUpdate();
 
 			JOptionPane.showConfirmDialog(null, "Registro con Exito.");
@@ -106,10 +114,14 @@ public class Agencia {
 			System.out.println(e.getMessage());
 		}
 	}
-//Eliminar
+	//Eliminar, este metodo elimina un registro de la tabla "tblagencia" basado en el "id_agencia"
+	
+	//metodo que recibe y no retorna
+
 	public void delete(int id_agencia) {
+	
 		Connection bdConnection = null;
-		PreparedStatement pst = null;
+		PreparedStatement pst = null; //prepara la transaccion
 		String script = "DELETE FROM tblagencia WHERE id_agencia = ?";
 
 		try {
@@ -131,9 +143,13 @@ public class Agencia {
 
 		}
 	}
-//Consultar
+	//consultar, este metodo consulta un registro especifico de la tabla "tblagencia" utilizando "id_agencia" proporcionado
+	
+	
+	//metodo que recibe y no retorna
+
 	public void readOne(int id_agencia, JTextField Nombre, JTextField dirección, JTextField CorreoElectronico,
-			JTextField Telefono, JTextField web, JTextField idcompañia) {
+			JTextField Telefono, JTextField web, JTextField tblcompañia_id_compañia) {
 
 		Connection bdConnection = null;
 		PreparedStatement pst = null;
@@ -152,7 +168,7 @@ public class Agencia {
 				CorreoElectronico.setText(rs.getString(4));
 				Telefono.setText(rs.getString(5));
 				web.setText(rs.getString(6));
-				idcompañia.setText(rs.getString(7));
+				tblcompañia_id_compañia.setText(rs.getString(7));
 
 			}
 
@@ -161,9 +177,13 @@ public class Agencia {
 
 		}
 	}
-// Actualizar
+	//Actualizar, Este metodo Actualiza un registro existente en la tblagencia con los nuevos valores proporcionados 
+	
+	
+	//metodo que recibe y no retorna
+
 	public void Update(int id_agencia, String Nombre, String dirección, String CorreoElectronico,
-			String Telefono, String web, String idcompañia) {
+			String Telefono, String web, String tblcompañia_id_compañia) {
 
 		Connection dbConnection = null;
 		PreparedStatement pst = null;
@@ -178,7 +198,7 @@ public class Agencia {
 		pst.setString(3,CorreoElectronico);
 		pst.setString(4,Telefono);
 		pst.setString(5,web);
-		pst.setString(6,idcompañia);
+		pst.setString(6,tblcompañia_id_compañia);
 		pst.setInt(7,id_agencia);
 	
 		int respuesta = JOptionPane.showConfirmDialog(null, "Desea actualizar el reistro No. " + id_agencia + "?");

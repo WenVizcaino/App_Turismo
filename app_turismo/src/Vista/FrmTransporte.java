@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmTransporte extends JFrame {
 
@@ -151,7 +153,7 @@ public class FrmTransporte extends JFrame {
 			}
 		});
 		btndelete.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\2931168_bin_delete_remove_trash_garbage_icon (1).png"));
-		btndelete.setBounds(355, 127, 54, 59);
+		btndelete.setBounds(313, 127, 54, 59);
 		contentPane.add(btndelete);
 		
 		JButton btnconsult = new JButton("");
@@ -166,11 +168,22 @@ public class FrmTransporte extends JFrame {
 			}
 		});
 		btnconsult.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161346_search_magnifying_glass_zoom_tools_icon.png"));
-		btnconsult.setBounds(283, 127, 64, 59);
+		btnconsult.setBounds(247, 127, 64, 59);
 		contentPane.add(btnconsult);
 		
 		JLabel lblNewLabel = new JLabel("GESTION DE TRANSPORTE");
 		lblNewLabel.setBounds(151, 31, 145, 14);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cr.Update(Integer.parseInt(textid_transporte.getText()),textpuestos.getText(),textmodelo.getText(),textnumeromotor.getText(),textplacavehiculo.getText(),textnombre.getText(),textobservacion.getText(),textidtipotransporte.getText());
+
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161342_refresh_reload_restart_user_multimedia_icon.png"));
+		btnNewButton.setBounds(372, 127, 52, 59);
+		contentPane.add(btnNewButton);
 	}
 }

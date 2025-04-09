@@ -75,7 +75,7 @@ public class FrmAgencia extends JFrame {
 		lblTelefono.setBounds(63, 177, 46, 14);
 		getContentPane().add(lblTelefono);
 		
-		JLabel lblWed = new JLabel("Wed ");
+		JLabel lblWed = new JLabel("Web");
 		lblWed.setBounds(63, 216, 46, 14);
 		getContentPane().add(lblWed);
 		

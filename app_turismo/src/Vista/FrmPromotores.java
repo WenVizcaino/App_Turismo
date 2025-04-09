@@ -31,7 +31,6 @@ public class FrmPromotores extends JFrame {
 	private JTextField texttelefono;
 	private JTextField textidpromotores;
 	Promotores cr = new Promotores ();
-
 	/**
 	 * Launch the application.
 	 */
@@ -47,7 +46,6 @@ public class FrmPromotores extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -148,7 +146,7 @@ public class FrmPromotores extends JFrame {
 				cr.create(texttipoidentificacion.getText(),textnumerodocumento.getText(),textnombre.getText(),textapellido.getText(),textdireción.getText(),textcorreopersonal.getText(),textcorreocorporativo.getText(),textfechanacimiento.getText(),texttelefono.getText());
 			}
 		});
-		btnGuardar.setBounds(320, 278, 89, 23);
+		btnGuardar.setBounds(284, 267, 89, 23);
 		contentPane.add(btnGuardar);
 		
 		JLabel lblidpromotores = new JLabel("Id Promotores");
@@ -169,7 +167,7 @@ public class FrmPromotores extends JFrame {
 			}
 		});
 		btndelete.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\2931168_bin_delete_remove_trash_garbage_icon (1).png"));
-		btndelete.setBounds(438, 130, 46, 57);
+		btndelete.setBounds(469, 205, 46, 57);
 		contentPane.add(btndelete);
 		
 		JButton btnconsult = new JButton("");
@@ -182,11 +180,25 @@ public class FrmPromotores extends JFrame {
 	
 		});
 		btnconsult.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161346_search_magnifying_glass_zoom_tools_icon.png"));
-		btnconsult.setBounds(370, 140, 58, 48);
+		btnconsult.setBounds(469, 155, 46, 41);
 		contentPane.add(btnconsult);
 		
 		JLabel lblNewLabel = new JLabel("GESTION PROMOTORES");
 		lblNewLabel.setBounds(177, 29, 142, 14);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnUpdate = new JButton("");
+		btnUpdate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.Update(Integer.parseInt(textidpromotores.getText()),texttipoidentificacion.getText(), textnumerodocumento.getText(), textnombre.getText(), textapellido.getText(), textdireción.getText(), textcorreopersonal.getText(), textcorreocorporativo.getText(), textfechanacimiento.getText(), texttelefono.getText());
+						
+				
+				
+			}
+		});
+		btnUpdate.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161342_refresh_reload_restart_user_multimedia_icon.png"));
+		btnUpdate.setBounds(464, 267, 51, 41);
+		contentPane.add(btnUpdate);
 	}
 }

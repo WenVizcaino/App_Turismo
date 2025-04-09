@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmTiposTransporte extends JFrame {
 
@@ -100,7 +102,7 @@ public class FrmTiposTransporte extends JFrame {
 			}
 		});
 		btndelete.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\2931168_bin_delete_remove_trash_garbage_icon (1).png"));
-		btndelete.setBounds(318, 120, 51, 55);
+		btndelete.setBounds(280, 120, 51, 55);
 		contentPane.add(btndelete);
 		
 		JButton btnconsult = new JButton("");
@@ -114,11 +116,22 @@ public class FrmTiposTransporte extends JFrame {
 			
 		});
 		btnconsult.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161346_search_magnifying_glass_zoom_tools_icon.png"));
-		btnconsult.setBounds(246, 120, 51, 57);
+		btnconsult.setBounds(224, 118, 51, 57);
 		contentPane.add(btnconsult);
 		
 		JLabel lblNewLabel_1 = new JLabel("GESTION DE TIPO DE TRANSPORTE");
 		lblNewLabel_1.setBounds(125, 11, 181, 28);
 		contentPane.add(lblNewLabel_1);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cr.Update(Integer.parseInt(textidtipotransporte.getText()),textnombre.getText(),textObservacion.getText());
+
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161342_refresh_reload_restart_user_multimedia_icon.png"));
+		btnNewButton.setBounds(341, 120, 57, 55);
+		contentPane.add(btnNewButton);
 	}
 }

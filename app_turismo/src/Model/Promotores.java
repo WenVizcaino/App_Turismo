@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Controlador.Conexion;
+import Vista.Interfaz;
 
 public class Promotores {
 	public int idpromotores =0;
@@ -22,7 +23,8 @@ public class Promotores {
 	public String fechanacimiento="";
 	public int telefono =0;
 	Conexion conector = new Conexion();
-
+	Interfaz it = new Interfaz();
+	
 	public int getIdpromotores() {
 		return idpromotores;
 	}
@@ -174,10 +176,67 @@ public class Promotores {
 			System.out.println(e.getMessage());
 
 		}		
-	}			
-	
-}
-	
+	}
+	public void Update(int idpromotores, String tipoidentificacion, String numerodocumento, String nombre, String apellido, String direción, String correopersonal,
+			String correocorporativo, String fechanacimiento, String telefono) {
+		// TODO Auto-generated method stub
 		
+		Connection dbConnection = null;
+		PreparedStatement pst = null;
+		
+		String script = "UPDATE tblpromotores SET tipoidentificacion = ?, numerodocumento = ?, nombre = ?, apellido = ?, direción = ?, correopersonal = ?, fechanacimiento = ?, telefono = ? WHERE idpromotores = ? " ;
+		
+		try { dbConnection = conector.conectarBD();
+		pst = dbConnection.prepareStatement(script);
+		
+		
+		pst.setString(1,tipoidentificacion);
+		pst.setString(2,numerodocumento);
+		pst.setString(3,nombre);
+		pst.setString(4,apellido);
+		pst.setString(5,direción);
+		pst.setString(6,correopersonal);
+		pst.setString(7,fechanacimiento);
+		pst.setString(8,telefono);
+		pst.setInt(9,idpromotores);
+	
+		int respuesta = JOptionPane.showConfirmDialog(null, "Desea actualizar el reistro No. " + idpromotores + "?");
+		if (respuesta == JOptionPane.YES_OPTION) {
+			pst.execute();
+			JOptionPane.showConfirmDialog(null, "Registro No." + idpromotores +"Actualizado");
+		}
+	}
+	  catch (Exception e) {
+		System.out.println(e.getMessage());
+
+	}
+	}
+		public void ControlAcesso(String usuario, String contraseña) {
+
+			Connection bdConnection = null;
+			PreparedStatement pst = null;
+			String script = "SELECT * FROM tblpromotores WHERE numerodocumento = ? and contrasena";
+
+			try {
+				bdConnection = conector.conectarBD();
+				pst = bdConnection.prepareStatement(script);
+
+				pst.setString(1, usuario);
+				pst.setString(2, contraseña);
+				ResultSet rs = pst.executeQuery();
+
+				while (rs.next()) {
+					it.show();
+
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+	}
+		
+}
+
+
+
 	
 

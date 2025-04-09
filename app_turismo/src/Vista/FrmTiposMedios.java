@@ -99,11 +99,11 @@ public class FrmTiposMedios extends JFrame {
 		contentPane.add(btnguardar);
 		
 		JLabel lblidtiposmedios = new JLabel("Id Tipos Medios");
-		lblidtiposmedios.setBounds(286, 81, 46, 14);
+		lblidtiposmedios.setBounds(275, 81, 46, 14);
 		contentPane.add(lblidtiposmedios);
 		
 		textidtiposmedios = new JTextField();
-		textidtiposmedios.setBounds(264, 106, 86, 20);
+		textidtiposmedios.setBounds(248, 109, 86, 20);
 		contentPane.add(textidtiposmedios);
 		textidtiposmedios.setColumns(10);
 		
@@ -116,7 +116,7 @@ public class FrmTiposMedios extends JFrame {
 			}
 		});
 		btndelete.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\2931168_bin_delete_remove_trash_garbage_icon (1).png"));
-		btndelete.setBounds(321, 137, 46, 63);
+		btndelete.setBounds(358, 139, 46, 63);
 		contentPane.add(btndelete);
 		
 		JButton btnconsult = new JButton("");
@@ -128,7 +128,22 @@ public class FrmTiposMedios extends JFrame {
 			}
 		});
 		btnconsult.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161346_search_magnifying_glass_zoom_tools_icon.png"));
-		btnconsult.setBounds(242, 137, 53, 51);
+		btnconsult.setBounds(351, 81, 53, 51);
 		contentPane.add(btnconsult);
+		
+		JButton btnUpdate = new JButton("");
+		btnUpdate.setIcon(new ImageIcon("C:\\Users\\SENA\\Downloads\\9161342_refresh_reload_restart_user_multimedia_icon.png"));
+		btnUpdate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cr.Update(Integer.parseInt(textidtiposmedios.getText()), txtNombre.getText(), txtObservacion.getText(), Integer.parseInt(txtidmedios.getText()));
+				
+				
+				
+				
+			}
+		});
+		btnUpdate.setBounds(358, 213, 53, 37);
+		contentPane.add(btnUpdate);
 	}
 }

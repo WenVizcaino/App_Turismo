@@ -205,7 +205,7 @@ public class Paquetes {
 	public void readOne(int codigo, JTextField iddestion, JTextField idorigen, JTextField fechaventa,
 			JTextField horaventa, JTextField horasalida, JTextField fechaejecucion,
 			JTextField observacion, JTextField idmedios, JTextField idtipotransporte,
-			JTextField idpromotores, JTextField precio, JTextField idclientes) {
+			JTextField idpromotores, JTextField precio, JTextField idclientes,JTextField id_agencia) {
 
 		Connection bdConnection = null;
 		PreparedStatement pst = null;
@@ -231,13 +231,55 @@ public class Paquetes {
 				idpromotores.setText(rs.getString(11));
 				precio.setText(rs.getString(12));
 				idclientes.setText(rs.getString(13));
+				id_agencia.setText(rs.getString(13));
 			
 			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 
-		}		
-	}			
+		}
+	}
+
+	public void Update(int codigo, String iddestion, String idorigen, String fechaventa, String horaventa, String horasalida, String fechaejecucion,
+			String observacion, String idmedios, String idtipotransporte, String idpromotores, String precio, String idclientes,String id_agencia) {
+
+		Connection dbConnection = null;
+		PreparedStatement pst = null;
+		
+		String script = "UPDATE tblpaquetes SET iddestion = ?, idorigen = ?, fechaventa = ?, horaventa = ?, horasalida = ?, fechaejecucion = ?, observacion  = ?, idmedios = ?,  idtipotransporte = ?, idpromotores = ?, precio = ?,  tblclientes_idclientes = ?, id_agencia = ? WHERE codigo = ?" ;
+		
+		try { dbConnection = conector.conectarBD();
+		pst = dbConnection.prepareStatement(script);
+		
+		
+		pst.setString(1,iddestion);
+		pst.setString(2,idorigen);
+		pst.setString(3,fechaventa);
+		pst.setString(4,horaventa);
+		pst.setString(5,horasalida);
+		pst.setString(6,fechaejecucion);
+		pst.setString(7,observacion);
+		pst.setString(8,idmedios);
+		pst.setString(9,idtipotransporte);
+		pst.setString(10,idpromotores);
+		pst.setString(11,precio);
+		pst.setString(12,idclientes);
+		pst.setString(13,id_agencia);
+		pst.setInt(14,codigo);
 	
+		int respuesta = JOptionPane.showConfirmDialog(null, "Desea actualizar el reistro No. " + codigo + "?");
+		if (respuesta == JOptionPane.YES_OPTION) {
+			pst.execute();
+			JOptionPane.showConfirmDialog(null, "Registro No." + codigo +"Actualizado");
+		}
+	}
+	  catch (Exception e) {
+		System.out.println(e.getMessage());
+
+	}
+		
 }
+		
+}
+
